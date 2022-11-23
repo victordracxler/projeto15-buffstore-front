@@ -21,19 +21,18 @@ export default function LoginPage() {
         const { name, value } = e.target
         const formContent = { ...form, [name]: value }
         setForm(formContent)
-        console.log(formContent)
+        //console.log(formContent)
     }}
 
     function login() {
         const URLlogin = URL+"sign-in"
-
+        console.log(form)
         const promise = axios.post(URLlogin, form)
 
         setLoad(true)
 
         promise.then((res) => {
           setToken(res.data.token)
-          //console.log(res.data)
           setLoad(false)
           navigate("/carrinho")
         })
@@ -54,7 +53,7 @@ export default function LoginPage() {
             name="email"
             value={form.email}
             onChange={fillForm}
-            type="text"
+            type="e-mail"
             disabled= {load && true}
             load={load}
             />
