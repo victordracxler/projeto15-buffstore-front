@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -54,6 +54,10 @@ a{
 a:visited{
 	text-decoration: none;
 }
-`
+
+*{
+	box-sizing:border-box;
+}
+`;
 
 export default GlobalStyle;
