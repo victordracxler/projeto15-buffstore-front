@@ -14,7 +14,7 @@ export default function LoginPage() {
     const [form, setForm] = useState({ email: "", password: "" })
     const [load, setLoad] = useState(false)
     const navigate = useNavigate()
-    const {setToken} = useAuth()
+    const {setToken, setUsername, setSessionUserID} = useAuth()
 
     function fillForm(e) {
         if (!load){
@@ -33,6 +33,8 @@ export default function LoginPage() {
 
         promise.then((res) => {
           setToken(res.data.token)
+          setUsername(res.data.name)
+          setSessionUserID(res.data.sessionUserID)
           setLoad(false)
           navigate("/carrinho")
         })
