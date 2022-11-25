@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar';
 import { API_URL, URL } from '../../constants/urls';
 import ProductThumbnail from '../../components/ProductThumbnail.js';
+import { baseFont } from '../../constants/fonts';
 
 export default function InitialPage() {
 	const [productsList, setProductsList] = useState([]);
@@ -34,4 +35,5 @@ const ProductsContainer = styled.div`
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
+	font-family: ${baseFont};
 `;
