@@ -14,7 +14,7 @@ export default function LoginPage() {
 	const [form, setForm] = useState({ email: '', password: '' });
 	const [load, setLoad] = useState(false);
 	const navigate = useNavigate();
-	const { setToken, setUsername, setSessionUserID } = useAuth();
+	const { setToken, setUsername } = useAuth();
 
 	function fillForm(e) {
 		if (!load) {
@@ -27,7 +27,7 @@ export default function LoginPage() {
 
 	function login() {
 		const URLlogin = URL + 'sign-in';
-		console.log(form);
+		//console.log(form);
 		const promise = axios.post(URLlogin, form);
 
 		setLoad(true);
@@ -35,7 +35,6 @@ export default function LoginPage() {
 		promise.then((res) => {
 			setToken(res.data.token);
 			setUsername(res.data.name);
-			setSessionUserID(res.data.sessionUserID);
 			localStorage.setItem('bstoken', JSON.stringify(res.data.token));
 			localStorage.setItem('bsusername', JSON.stringify(res.data.name));
 
@@ -44,7 +43,7 @@ export default function LoginPage() {
 		});
 
 		promise.catch((err) => {
-			alert(err.response.data);
+			alert(err.response.data.message);
 			setLoad(false);
 		});
 	}
