@@ -13,27 +13,11 @@ import axios from "axios"
 export default function NavBar() {
     const navigate = useNavigate()
     const [load, setLoad] = useState(false)
-    const { username, sessionUserID, setUsername} = useAuth()
-
-    function navigateInitialPage(){
-        navigate("/")
-    }
-
-    function navigateLoginPage(){
-        navigate("/entrar")
-    }
-
-    function navigateSignUpPage(){
-        navigate("/cadastro")
-    }
-    
-    function navigateCartPage(){
-        navigate("/carrinho")
-    }
+    const { username, token, setUsername} = useAuth()
 
     function logout() {
-        const URLlogin = URL+"sign-out/"+sessionUserID
-        console.log(URL+"sign-out/"+sessionUserID)
+        const URLlogin = URL+"sign-out/"+token
+        console.log(URL+"sign-out/"+token)
         const promise = axios.delete(URLlogin)
 
         setLoad(true)
@@ -52,11 +36,11 @@ export default function NavBar() {
     return(
         <>  
             <NavBarContainer>
-                <Title onClick={navigateInitialPage}>Buff Store</Title>
+                <Title onClick={()=> navigate("/")}>Buff Store</Title>
                 <PathsContainer>
-                    <PathItem onClick={navigateLoginPage}>Login</PathItem>
-                    <PathItem onClick={navigateSignUpPage}>SignUp</PathItem>
-                    <PathItem onClick={navigateCartPage}>CartPage</PathItem>
+                    <PathItem onClick={()=> navigate("/entrar")}>Login</PathItem>
+                    <PathItem onClick={()=> navigate("/cadastro")}>SignUp</PathItem>
+                    <PathItem onClick={()=> navigate("/carrinho")}>CartPage</PathItem>
                     <WelcomeTitle> Olá, {username}! 
                     { username !== "visitante" ?
 
@@ -73,7 +57,7 @@ export default function NavBar() {
                     color={white} 
                     height="25px"
                     width="25px"
-                    onClick={navigateLoginPage}
+                    onClick={()=> navigate("/entrar")}
                     />
                     }
                     </WelcomeTitle>

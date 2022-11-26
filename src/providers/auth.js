@@ -14,7 +14,6 @@ export const AuthProvider = (props) => {
 			? JSON.parse(localStorage.getItem('bsusername'))
 			: 'visitante'
 	);
-	const [sessionUserID, setSessionUserID] = useState('');
 
 	return (
 		<AuthContext.Provider
@@ -23,8 +22,6 @@ export const AuthProvider = (props) => {
 				setToken,
 				username,
 				setUsername,
-				sessionUserID,
-				setSessionUserID,
 			}}
 		>
 			{props.children}
