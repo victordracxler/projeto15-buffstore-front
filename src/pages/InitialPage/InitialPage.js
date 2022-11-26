@@ -20,7 +20,6 @@ export default function InitialPage() {
 	return (
 		<>
 			<NavBar />
-			InitialPage
 			<ProductsContainer>
 				{productsList.map(ProductThumbnail)}
 			</ProductsContainer>
@@ -29,7 +28,7 @@ export default function InitialPage() {
 }
 
 const ProductsContainer = styled.div`
-	margin-top: 70px;
+	margin-top: 100px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;

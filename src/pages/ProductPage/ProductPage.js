@@ -1,18 +1,21 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import NavBar from '../../components/NavBar';
 import { navBarColor } from '../../constants/colors';
 import { baseFont } from '../../constants/fonts';
 import { URL } from '../../constants/urls';
+import { useAuth } from '../../providers/auth';
 
 export default function ProductPage() {
 	const params = useParams();
 	const [product, setProduct] = useState({});
 	const productId = params.id;
+	const { token } = useAuth();
 
 	const { _id, name, type, price, image, description } = product;
+	// const priceBRL = price?.toLocaleString('pt-br');
 
 	useEffect(() => {
 		const getUrl = URL + 'products/' + productId;
@@ -25,6 +28,23 @@ export default function ProductPage() {
 			.catch((err) => console.log(err));
 	}, []);
 
+	function handleAddToCart(e) {
+		if (token.length === 0) {
+			alert('Você deve fazer login para adicionar ao carrinho!');
+			return;
+		}
+
+		const headers = { Authorization: `Bearer ${token}` };
+
+		axios
+			.post(URL + 'addtocart', { productId }, { headers })
+			.then((res) => {
+				console.log(res.data);
+				alert('Adicionado ao carrinho com sucesso!');
+			})
+			.catch((err) => console.log(err));
+	}
+
 	return (
 		<>
 			<NavBar />
@@ -33,8 +53,10 @@ export default function ProductPage() {
 				<img src={image} alt={name} />
 
 				<div className="price-cart">
-					<h2>R$ {price.toLocaleString('pt-br')}</h2>
-					<button>Adicionar ao carrinho</button>
+					<h2>R$ {price?.toFixed(2).toLocaleString('pt-br')}</h2>
+					<button onClick={handleAddToCart}>
+						Adicionar ao carrinho
+					</button>
 				</div>
 
 				<div className="desc-box">
