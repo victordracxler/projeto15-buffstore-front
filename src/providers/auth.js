@@ -16,6 +16,7 @@ export const AuthProvider = (props) => {
 	);
 
 	const [productsList, setProductsList] = useState([]);
+	const [totalPrice, setTotalPrice] = useState(0);
 	return (
 		<AuthContext.Provider
 			value={{
@@ -24,7 +25,9 @@ export const AuthProvider = (props) => {
 				username,
 				setUsername,
 				productsList,
-				setProductsList
+				setProductsList,
+				totalPrice,
+				setTotalPrice
 			}}
 		>
 			{props.children}

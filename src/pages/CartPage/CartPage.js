@@ -8,10 +8,13 @@ import styled from "styled-components";
 import { baseFont } from "../../constants/fonts";
 
 export default function CartPage() {
-    const {token} = useAuth();
+    const {token, productsList, setTotalPrice, totalPrice } = useAuth();
     const [cartList, setCartList] = useState([]);
     const newCartList = [];
-
+    let totalPriceAux = 0;
+    const [totalItens, setTotalItens] = useState(0);
+    const { } = useAuth()
+    
 	useEffect(() => {
         
         const URLcart = URL + 'cart'
@@ -21,8 +24,10 @@ export default function CartPage() {
 
 		promise.then((res) => {
             const cartListAux = res.data.products
-
+            
             for (let i = 0; i< cartListAux.length; i++){
+                const product = productsList.find(p => p._id === (cartListAux[i]))
+                totalPriceAux = totalPriceAux + product.price
                 if(!newCartList.find(item => item.productId === cartListAux[i])){
                     newCartList.push({productId: cartListAux[i], quantity:1})
                 } else{
@@ -39,7 +44,8 @@ export default function CartPage() {
                 }
             }
             setCartList(newCartList)
-            
+            setTotalPrice(totalPriceAux)
+            setTotalItens(cartListAux.length)
         });
 
         promise.catch((err) => 
@@ -55,7 +61,9 @@ export default function CartPage() {
         <NavBar/>
         <ItemCartContainer>
         <p>Meu carrinho</p>
+        <p>Itens selecionados: {totalItens}</p>
         {cartList.map((item, index) => <ItemCart key={index} item={item}></ItemCart>)}
+        <p>Total: {totalPrice}</p>
         </ItemCartContainer>
         </>
     )
@@ -68,5 +76,6 @@ const ItemCartContainer = styled.div`
     align-items: center;
     && p{
         font-family: ${baseFont};
+        margin-bottom: 10px;
     }
 `
