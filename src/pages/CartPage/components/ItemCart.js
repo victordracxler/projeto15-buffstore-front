@@ -4,8 +4,8 @@ import { baseFont } from "../../../constants/fonts"
 import { useAuth } from "../../../providers/auth"
 
 export default function ItemCart({item}) {
-    const { productsList } = useAuth()
-    const product = productsList.find(p => p._id === (item.productId)) 
+    const { productsList, setTotalPrice, totalPrice } = useAuth()
+    const product = productsList.find(p => p._id === (item.productId))
     return(
         <>
         <ItemCartContainer>
