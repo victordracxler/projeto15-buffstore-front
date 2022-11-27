@@ -15,6 +15,7 @@ export const AuthProvider = (props) => {
 			: 'visitante'
 	);
 
+	const [productsList, setProductsList] = useState([]);
 	return (
 		<AuthContext.Provider
 			value={{
@@ -22,6 +23,8 @@ export const AuthProvider = (props) => {
 				setToken,
 				username,
 				setUsername,
+				productsList,
+				setProductsList
 			}}
 		>
 			{props.children}

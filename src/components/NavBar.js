@@ -16,19 +16,22 @@ export default function NavBar() {
     const { username, token, setUsername} = useAuth()
 
     function logout() {
-        const URLlogin = URL+"sign-out/"+token
-        console.log(URL+"sign-out/"+token)
-        const promise = axios.delete(URLlogin)
+        const URLlogout = URL+"sign-out/"
+        const promise = axios.delete(URLlogout, {
+            headers: { Authorization: `Bearer ${token}` }
+          })
 
         setLoad(true)
 
         promise.then((res) => {
           navigate("/")
-          setUsername("visitante")
+          setUsername("visitante");
+          localStorage.removeItem('bstoken');
+          localStorage.removeItem('bsusername');
         })
     
         promise.catch((err) => {
-          alert(err.response.data)
+          alert(err.response.data.message)
           setLoad(false)
         })
     
