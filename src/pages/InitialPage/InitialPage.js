@@ -1,14 +1,15 @@
 import axios from 'axios';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import NavBar from '../../components/NavBar';
 import { API_URL, URL } from '../../constants/urls';
 import ProductThumbnail from '../../components/ProductThumbnail.js';
 import { baseFont } from '../../constants/fonts';
+import { useAuth } from '../../providers/auth';
 
 export default function InitialPage() {
-	const [productsList, setProductsList] = useState([]);
-
+	const {productsList, setProductsList} = useAuth()
+	
 	useEffect(() => {
 		const route = 'products';
 		axios
