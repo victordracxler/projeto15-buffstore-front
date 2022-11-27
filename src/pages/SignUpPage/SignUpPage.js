@@ -1,14 +1,15 @@
-import styled from "styled-components"
-import NavBar from "../../components/NavBar"
-import { useState } from "react"
-import { Input } from "../../components/Input"
-import { backgroundColor, white } from "../../constants/colors"
-import { ThreeDots } from "react-loader-spinner"
-import { SubmitButton } from "../../components/SubmitButton"
-import { useNavigate } from "react-router-dom"
-import { URL } from "../../constants/urls"
-import axios from "axios"
-
+import styled from "styled-components";
+import NavBar from "../../components/NavBar";
+import { useState } from "react";
+import { Input } from "../../components/Input";
+import { backgroundColor, white } from "../../constants/colors";
+import { ThreeDots } from "react-loader-spinner";
+import { SubmitButton } from "../../components/SubmitButton";
+import { useNavigate } from "react-router-dom";
+import { URL } from "../../constants/urls";
+import axios from "axios";
+import { LinkToClick } from "../../components/LinkToClick";
+import swal from "sweetalert";
 
 export default function SignUpPage() {
     const [form, setForm] = useState({ name: "", email: "", password: "" , passwordConfirmation: ""})
@@ -36,7 +37,9 @@ export default function SignUpPage() {
         })
     
         promise.catch((err) => {
-          alert(err.response.data.message)
+          swal({
+            title: err.response.data
+          })
           setLoad(false)
         })
     
@@ -98,6 +101,9 @@ export default function SignUpPage() {
             "Cadastrar"
             }
             </SubmitButton>
+            <LinkToClick onClick={()=>navigate("/entrar")}>
+              <p>Já tem uma conta? Entre agora!</p>
+            </LinkToClick>
         </SignUpPageContainer>
         </>
     )

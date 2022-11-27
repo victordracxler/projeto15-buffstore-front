@@ -9,6 +9,8 @@ import { SubmitButton } from '../../components/SubmitButton';
 import { useNavigate } from 'react-router-dom';
 import { URL } from '../../constants/urls';
 import axios from 'axios';
+import { LinkToClick } from '../../components/LinkToClick';
+import swal from 'sweetalert';
 
 export default function LoginPage() {
 	const [form, setForm] = useState({ email: '', password: '' });
@@ -39,11 +41,14 @@ export default function LoginPage() {
 			localStorage.setItem('bsusername', JSON.stringify(res.data.name));
 
 			setLoad(false);
-			navigate('/');
+			navigate('/carrinho');
 		});
 
 		promise.catch((err) => {
-			alert(err.response.data.message);
+			console.log('err', err.response.data)
+			swal({
+				title: err.response.data
+			});
 			setLoad(false);
 		});
 	}
@@ -86,6 +91,9 @@ export default function LoginPage() {
 						'Entrar'
 					)}
 				</SubmitButton>
+				<LinkToClick onClick={()=> navigate("/cadastro")}>
+					<p>Primeira vez? Cadastre-se!</p>
+				</LinkToClick>
 			</LoginPageContainer>
 		</>
 	);
