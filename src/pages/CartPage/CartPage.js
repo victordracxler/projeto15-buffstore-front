@@ -6,9 +6,11 @@ import { useAuth } from "../../providers/auth";
 import ItemCart from "./components/ItemCart";
 import styled from "styled-components";
 import { baseFont } from "../../constants/fonts";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPage() {
-    const {token, productsList, setTotalPrice, totalPrice, totalItens, setTotalItens } = useAuth();
+    const navigate = useNavigate();
+    const {token, productsList, setTotalPrice, totalPrice, totalItems, setTotalItems } = useAuth();
     const [cartList, setCartList] = useState([]);
     const newCartList = [];
     let totalPriceAux = 0;
@@ -43,7 +45,7 @@ export default function CartPage() {
             }
             setCartList(newCartList)
             setTotalPrice(totalPriceAux)
-            setTotalItens(cartListAux.length)
+            setTotalItems(cartListAux.length)
         });
 
         promise.catch((err) => 
@@ -58,10 +60,20 @@ export default function CartPage() {
         <>
         <NavBar/>
         <ItemCartContainer>
+        {cartList.length !== 0
+        ?
+        <>
         <p>Meu carrinho</p>
-        <p>Itens selecionados: {totalItens}</p>
+        <p>Itens selecionados: {totalItems}</p>
         {cartList.map((item, index) => <ItemCart key={index} item={item}></ItemCart>)}
         <p>Total: {totalPrice}</p>
+        </>
+        :
+        <>
+        <p>Não há itens no carrinho</p>
+        <p onClick={()=> navigate("/")}>Adicionar produtos</p>
+        </>
+        }
         </ItemCartContainer>
         </>
     )

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import swal from 'sweetalert';
 import NavBar from '../../components/NavBar';
 import { navBarColor } from '../../constants/colors';
 import { baseFont } from '../../constants/fonts';
@@ -31,7 +32,10 @@ export default function ProductPage() {
 
 	function handleAddToCart(e) {
 		if (token.length === 0) {
-			alert('Você deve fazer login para adicionar ao carrinho!');
+			swal({
+				title:'Você deve fazer login para adicionar ao carrinho!'
+			});
+			navigate('/entrar')
 			return;
 		}
 
@@ -41,7 +45,9 @@ export default function ProductPage() {
 			.post(URL + 'addtocart', { productId }, { headers })
 			.then((res) => {
 				console.log(res.data);
-				alert('Adicionado ao carrinho com sucesso!');
+				swal({
+					title:'Adicionado ao carrinho com sucesso!'
+			});
 				navigate('/carrinho')
 			})
 			.catch((err) => console.log(err));

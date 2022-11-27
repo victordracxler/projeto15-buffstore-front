@@ -1,20 +1,19 @@
-import styled from "styled-components"
-import { navBarColor, white } from "../constants/colors"
-import { logoFont } from "../constants/fonts"
-import { useNavigate } from "react-router-dom"
-import { useAuth } from "../providers/auth"
-import { Cart, LogInOutline } from "react-ionicons"
-import { LogOutOutline } from "react-ionicons"
-import { WelcomeTitle } from "./WelcomeTitle"
-import { useState } from "react"
-import { URL } from "../constants/urls"
-import axios from "axios"
-import { CartOutline } from 'react-ionicons'
+import styled from "styled-components";
+import { navBarColor, white } from "../constants/colors";
+import { logoFont } from "../constants/fonts";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../providers/auth";
+import { CartOutline, LogInOutline } from "react-ionicons";
+import { LogOutOutline } from "react-ionicons";
+import { WelcomeTitle } from "./WelcomeTitle";
+import { useState } from "react";
+import { URL } from "../constants/urls";
+import axios from "axios";
 
 export default function NavBar() {
-    const navigate = useNavigate()
-    const [load, setLoad] = useState(false)
-    const { username, token, setUsername, totalItens} = useAuth()
+    const navigate = useNavigate();
+    const [load, setLoad] = useState(false);
+    const { username, token, setUsername, totalItems, setTotalItems, setTotalPrice} = useAuth();
 
     function logout() {
         const URLlogout = URL+"sign-out/"
@@ -29,6 +28,8 @@ export default function NavBar() {
           setUsername("visitante");
           localStorage.removeItem('bstoken');
           localStorage.removeItem('bsusername');
+          setTotalPrice(0);
+	      setTotalItems(0);
         })
     
         promise.catch((err) => {
@@ -37,22 +38,27 @@ export default function NavBar() {
         })
     
       }
+      function navigateCart(){
+        if (username === "visitante"){
+            navigate("/cadastro")
+        } else{
+            navigate("/carrinho")
+        }
+      }
     return(
         <>  
             <NavBarContainer>
                 <Title onClick={()=> navigate("/")}>Buff Store</Title>
+                
                 <PathsContainer>
-                    <PathItem onClick={()=> navigate("/entrar")}>Login</PathItem>
-                    <PathItem onClick={()=> navigate("/cadastro")}>SignUp</PathItem>
-                    <PathItem onClick={()=> navigate("/carrinho")}>CartPage</PathItem>
-                    
-                    <CartContainer>
+                    <PathItem onClick={()=> navigate("/")}>Produtos</PathItem>
+                    <CartContainer onClick={navigateCart}>
                         <CartOutline
                         color={white} 
                         height="25px"
                         width="25px"
                         />
-                        <div>{totalItens}</div>
+                        <div>{totalItems}</div>
                     </CartContainer>
                     <WelcomeTitle> Olá, {username}! 
                     { username !== "visitante" ?
