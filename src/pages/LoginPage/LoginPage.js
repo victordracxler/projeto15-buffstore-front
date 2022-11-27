@@ -39,7 +39,7 @@ export default function LoginPage() {
 			localStorage.setItem('bsusername', JSON.stringify(res.data.name));
 
 			setLoad(false);
-			navigate('/carrinho');
+			navigate('/');
 		});
 
 		promise.catch((err) => {

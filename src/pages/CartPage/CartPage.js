@@ -8,12 +8,10 @@ import styled from "styled-components";
 import { baseFont } from "../../constants/fonts";
 
 export default function CartPage() {
-    const {token, productsList, setTotalPrice, totalPrice } = useAuth();
+    const {token, productsList, setTotalPrice, totalPrice, totalItens, setTotalItens } = useAuth();
     const [cartList, setCartList] = useState([]);
     const newCartList = [];
     let totalPriceAux = 0;
-    const [totalItens, setTotalItens] = useState(0);
-    const { } = useAuth()
     
 	useEffect(() => {
         

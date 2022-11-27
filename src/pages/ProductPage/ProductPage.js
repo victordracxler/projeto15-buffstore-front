@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import NavBar from '../../components/NavBar';
 import { navBarColor } from '../../constants/colors';
@@ -13,6 +13,7 @@ export default function ProductPage() {
 	const [product, setProduct] = useState({});
 	const productId = params.id;
 	const { token } = useAuth();
+	const navigate = useNavigate();
 
 	const { _id, name, type, price, image, description } = product;
 	// const priceBRL = price?.toLocaleString('pt-br');
@@ -41,6 +42,7 @@ export default function ProductPage() {
 			.then((res) => {
 				console.log(res.data);
 				alert('Adicionado ao carrinho com sucesso!');
+				navigate('/carrinho')
 			})
 			.catch((err) => console.log(err));
 	}

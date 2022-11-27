@@ -3,17 +3,18 @@ import { navBarColor, white } from "../constants/colors"
 import { logoFont } from "../constants/fonts"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../providers/auth"
-import { LogInOutline } from "react-ionicons"
+import { Cart, LogInOutline } from "react-ionicons"
 import { LogOutOutline } from "react-ionicons"
 import { WelcomeTitle } from "./WelcomeTitle"
 import { useState } from "react"
 import { URL } from "../constants/urls"
 import axios from "axios"
+import { CartOutline } from 'react-ionicons'
 
 export default function NavBar() {
     const navigate = useNavigate()
     const [load, setLoad] = useState(false)
-    const { username, token, setUsername} = useAuth()
+    const { username, token, setUsername, totalItens} = useAuth()
 
     function logout() {
         const URLlogout = URL+"sign-out/"
@@ -44,6 +45,15 @@ export default function NavBar() {
                     <PathItem onClick={()=> navigate("/entrar")}>Login</PathItem>
                     <PathItem onClick={()=> navigate("/cadastro")}>SignUp</PathItem>
                     <PathItem onClick={()=> navigate("/carrinho")}>CartPage</PathItem>
+                    
+                    <CartContainer>
+                        <CartOutline
+                        color={white} 
+                        height="25px"
+                        width="25px"
+                        />
+                        <div>{totalItens}</div>
+                    </CartContainer>
                     <WelcomeTitle> Olá, {username}! 
                     { username !== "visitante" ?
 
@@ -95,4 +105,11 @@ const PathsContainer = styled.div`
 `
 const PathItem = styled.div`
     font-family: ${logoFont};
+`
+const CartContainer = styled.div`
+    display: flex;
+    width: 40px;
+    justify-content: space-between;
+    align-items: center;
+    color: ${white};
 `
