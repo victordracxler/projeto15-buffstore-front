@@ -7,6 +7,7 @@ import ItemCart from "./components/ItemCart";
 import styled from "styled-components";
 import { baseFont } from "../../constants/fonts";
 import { useNavigate } from "react-router-dom";
+import { Background } from "../../components/Background";
 
 export default function CartPage() {
     const navigate = useNavigate();
@@ -59,6 +60,7 @@ export default function CartPage() {
     return(
         <>
         <NavBar/>
+        <Background>
         <ItemCartContainer>
         {cartList.length !== 0
         ?
@@ -75,17 +77,21 @@ export default function CartPage() {
         </>
         }
         </ItemCartContainer>
+        </Background>
         </>
     )
 }
 
 const ItemCartContainer = styled.div`
-    margin-top: 120px;
+    padding-top: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 100px;
+    font-weight: 600;
     && p{
         font-family: ${baseFont};
         margin-bottom: 10px;
+        color: white;
     }
 `

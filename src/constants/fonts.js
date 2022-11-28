@@ -1,2 +1,2 @@
 export const baseFont = 'Raleway'
-export const logoFont = 'ABeeZee'
+export const logoFont = 'Lexend Deca'

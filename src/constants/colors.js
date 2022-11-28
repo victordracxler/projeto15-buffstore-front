@@ -1,4 +1,4 @@
 export const white = '#FFFFFF'
-export const navBarColor = '#C5EBD8'
-export const buttonColor = '#B0CED8'
-export const backgroundColor = '#FFE0EB'
+export const navBarColor = '#C177CA'
+export const buttonColor = '#DB7AB3'
+export const backgroundColor = '#010036'

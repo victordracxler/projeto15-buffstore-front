@@ -1,15 +1,15 @@
 import styled from "styled-components"
-import { backgroundColor } from "../../../constants/colors"
+import {  navBarColor, white } from "../../../constants/colors"
 import { baseFont } from "../../../constants/fonts"
 import { useAuth } from "../../../providers/auth"
 
 export default function ItemCart({item}) {
-    const { productsList, setTotalPrice, totalPrice } = useAuth()
+    const { productsList } = useAuth()
     const product = productsList.find(p => p._id === (item.productId))
     return(
         <>
         <ItemCartContainer>
-        <img src={product.image}/>
+        <img src={product.image} alt=""/>
         <div>
         <p>Produto: {product.name}</p>
         <p>Tipo: {product.type}</p>
@@ -22,13 +22,13 @@ export default function ItemCart({item}) {
 }
 
 const ItemCartContainer = styled.div`
-    background-color: ${backgroundColor};
+    background-color: ${navBarColor};
     width: 300px;
     height: 200px;
     display: flex;
     padding: 20px;
     margin-bottom: 30px;
-    
+    color: ${white};
     && img{
         width: 100px;
         height: auto;

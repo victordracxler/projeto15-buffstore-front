@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { white } from '../../../constants/colors';
 
 export default function ProductThumbnail(product) {
 	const { _id, name, type, price, image } = product;
@@ -32,11 +33,11 @@ const ProductContainer = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: space-between;
-	color: #000000;
+	color: ${white};
 
 	img {
 		width: 100%;
-		max-height: 200px;
+		height: 200px;
 	}
 
 	h1 {

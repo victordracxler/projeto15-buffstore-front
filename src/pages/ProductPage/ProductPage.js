@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 import NavBar from '../../components/NavBar';
-import { navBarColor } from '../../constants/colors';
+import { backgroundColor, navBarColor, white } from '../../constants/colors';
 import { baseFont } from '../../constants/fonts';
 import { URL } from '../../constants/urls';
 import { useAuth } from '../../providers/auth';
@@ -81,16 +81,18 @@ export default function ProductPage() {
 }
 
 const Wrapper = styled.div`
-	margin-top: 100px;
+	padding-top: 100px;
+	padding-bottom: 200px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	font-family: ${baseFont};
-
+	background-color: ${backgroundColor};
 	h1 {
 		font-size: 26px;
 		font-weight: 700;
 		margin-bottom: 30px;
+		color: ${white};
 	}
 
 	img {
