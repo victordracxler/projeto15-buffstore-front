@@ -11,6 +11,7 @@ import { URL } from '../../constants/urls';
 import axios from 'axios';
 import { LinkToClick } from '../../components/LinkToClick';
 import swal from 'sweetalert';
+import { baseFont } from '../../constants/fonts';
 
 export default function LoginPage() {
 	const [form, setForm] = useState({ email: '', password: '' });
@@ -57,6 +58,7 @@ export default function LoginPage() {
 		<>
 			<NavBar />
 			<LoginPageContainer>
+				<p>Faça seu login :)</p>
 				<Input
 					placeholder="E-mail"
 					name="email"
@@ -109,4 +111,10 @@ const LoginPageContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	background-color: ${backgroundColor};
+
+	&& p{
+		font-family: ${baseFont};
+		color: ${white};
+		font-size: 20px;
+	}
 `;
