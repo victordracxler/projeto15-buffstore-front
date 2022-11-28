@@ -7,7 +7,7 @@ import { backgroundColor, white } from '../../constants/colors';
 import { ThreeDots } from 'react-loader-spinner';
 import { SubmitButton } from '../../components/SubmitButton';
 import { useNavigate } from 'react-router-dom';
-import { URL } from '../../constants/urls';
+import { API_URL, URL } from '../../constants/urls';
 import axios from 'axios';
 import { LinkToClick } from '../../components/LinkToClick';
 import swal from 'sweetalert';
@@ -29,7 +29,7 @@ export default function LoginPage() {
 	}
 
 	function login() {
-		const URLlogin = URL + 'sign-in';
+		const URLlogin = API_URL + 'sign-in';
 		//console.log(form);
 		const promise = axios.post(URLlogin, form);
 
@@ -46,9 +46,9 @@ export default function LoginPage() {
 		});
 
 		promise.catch((err) => {
-			console.log('err', err.response.data)
+			console.log('err', err.response.data);
 			swal({
-				title: err.response.data
+				title: err.response.data,
 			});
 			setLoad(false);
 		});
@@ -93,7 +93,7 @@ export default function LoginPage() {
 						'Entrar'
 					)}
 				</SubmitButton>
-				<LinkToClick onClick={()=> navigate("/cadastro")}>
+				<LinkToClick onClick={() => navigate('/cadastro')}>
 					<p>Primeira vez? Cadastre-se!</p>
 				</LinkToClick>
 			</LoginPageContainer>
@@ -112,7 +112,7 @@ const LoginPageContainer = styled.div`
 	align-items: center;
 	background-color: ${backgroundColor};
 
-	&& p{
+	&& p {
 		font-family: ${baseFont};
 		color: ${white};
 		font-size: 20px;

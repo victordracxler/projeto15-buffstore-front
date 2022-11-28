@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useAuth } from '../../../providers/auth';
 import { baseFont } from '../../../constants/fonts';
-import { URL } from '../../../constants/urls';
+import { API_URL, URL } from '../../../constants/urls';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ export default function AddressForm() {
 	function handleCheckout(e) {
 		e.preventDefault();
 
-		const URLcheckout = URL + 'checkout';
+		const URLcheckout = API_URL + 'checkout';
 		const config = {
 			headers: { Authorization: `Bearer ${token}` },
 		};
