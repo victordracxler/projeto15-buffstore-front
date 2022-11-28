@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import NavBar from '../../components/NavBar';
 import { backgroundColor, navBarColor, white } from '../../constants/colors';
 import { baseFont } from '../../constants/fonts';
-import { URL } from '../../constants/urls';
+import { API_URL, URL } from '../../constants/urls';
 import { useAuth } from '../../providers/auth';
 
 export default function ProductPage() {
@@ -20,7 +20,7 @@ export default function ProductPage() {
 	// const priceBRL = price?.toLocaleString('pt-br');
 
 	useEffect(() => {
-		const getUrl = URL + 'products/' + productId;
+		const getUrl = API_URL + 'products/' + productId;
 
 		axios
 			.get(getUrl)
@@ -33,22 +33,22 @@ export default function ProductPage() {
 	function handleAddToCart(e) {
 		if (token.length === 0) {
 			swal({
-				title:'Você deve fazer login para adicionar ao carrinho!'
+				title: 'Você deve fazer login para adicionar ao carrinho!',
 			});
-			navigate('/entrar')
+			navigate('/entrar');
 			return;
 		}
 
 		const headers = { Authorization: `Bearer ${token}` };
 
 		axios
-			.post(URL + 'addtocart', { productId }, { headers })
+			.post(API_URL + 'addtocart', { productId }, { headers })
 			.then((res) => {
 				console.log(res.data);
 				swal({
-					title:'Adicionado ao carrinho com sucesso!'
-			});
-				navigate('/carrinho')
+					title: 'Adicionado ao carrinho com sucesso!',
+				});
+				navigate('/carrinho');
 			})
 			.catch((err) => console.log(err));
 	}

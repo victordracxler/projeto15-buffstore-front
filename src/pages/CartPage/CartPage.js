@@ -1,7 +1,7 @@
 import NavBar from '../../components/NavBar';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { URL } from '../../constants/urls';
+import { API_URL, URL } from '../../constants/urls';
 import { useAuth } from '../../providers/auth';
 import ItemCart from './components/ItemCart';
 import styled from 'styled-components';
@@ -25,7 +25,7 @@ export default function CartPage() {
 	let totalPriceAux = 0;
 
 	useEffect(() => {
-		const URLcart = URL + 'cart';
+		const URLcart = API_URL + 'cart';
 		const promise = axios.get(URLcart, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
@@ -86,6 +86,7 @@ export default function CartPage() {
 								<ItemCart key={index} item={item}></ItemCart>
 							))}
 							<p>Total: {totalPrice}</p>
+							<AddressForm />
 						</>
 					) : (
 						<>
