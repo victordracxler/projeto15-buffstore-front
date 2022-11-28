@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { baseFont } from '../../constants/fonts';
 import { useNavigate } from 'react-router-dom';
 import AddressForm from './components/AddressForm';
+import { Background } from '../../components/Background';
 
 export default function CartPage() {
 	const navigate = useNavigate();
@@ -75,35 +76,41 @@ export default function CartPage() {
 	return (
 		<>
 			<NavBar />
-			<ItemCartContainer>
-				{cartList.length !== 0 ? (
-					<>
-						<p>Meu carrinho</p>
-						<p>Itens selecionados: {totalItems}</p>
-						{cartList.map((item, index) => (
-							<ItemCart key={index} item={item}></ItemCart>
-						))}
-						<p>Total: {totalPrice.toFixed(2)}</p>
-						<AddressForm />
-					</>
-				) : (
-					<>
-						<p>Não há itens no carrinho</p>
-						<p onClick={() => navigate('/')}>Adicionar produtos</p>
-					</>
-				)}
-			</ItemCartContainer>
+			<Background>
+				<ItemCartContainer>
+					{cartList.length !== 0 ? (
+						<>
+							<p>Meu carrinho</p>
+							<p>Itens selecionados: {totalItems}</p>
+							{cartList.map((item, index) => (
+								<ItemCart key={index} item={item}></ItemCart>
+							))}
+							<p>Total: {totalPrice}</p>
+						</>
+					) : (
+						<>
+							<p>Não há itens no carrinho</p>
+							<p onClick={() => navigate('/')}>
+								Adicionar produtos
+							</p>
+						</>
+					)}
+				</ItemCartContainer>
+			</Background>
 		</>
 	);
 }
 
 const ItemCartContainer = styled.div`
-	margin-top: 120px;
+	padding-top: 120px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding-bottom: 100px;
+	font-weight: 600;
 	&& p {
 		font-family: ${baseFont};
 		margin-bottom: 10px;
+		color: white;
 	}
 `;

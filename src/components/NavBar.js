@@ -9,6 +9,7 @@ import { WelcomeTitle } from "./WelcomeTitle";
 import { useState } from "react";
 import { URL } from "../constants/urls";
 import axios from "axios";
+import swal from "sweetalert";
 
 export default function NavBar() {
     const navigate = useNavigate();
@@ -40,7 +41,10 @@ export default function NavBar() {
       }
       function navigateCart(){
         if (username === "visitante"){
-            navigate("/cadastro")
+            swal({
+				title:'Você deve fazer login para adicionar ao carrinho!'
+			});
+            navigate("/entrar")
         } else{
             navigate("/carrinho")
         }
@@ -48,7 +52,7 @@ export default function NavBar() {
     return(
         <>  
             <NavBarContainer>
-                <Title onClick={()=> navigate("/")}>Buff Store</Title>
+                <Title onClick={()=> navigate("/")}>BUFF STORE</Title>
                 
                 <PathsContainer>
                     <PathItem onClick={()=> navigate("/")}>Produtos</PathItem>
@@ -95,6 +99,7 @@ const NavBarContainer = styled.div`
     flex-direction: column;
     justify-content: space-around;
     background-color: ${navBarColor};
+    z-index: 20;
 `
 const Title = styled.div`
     width: 100%;
@@ -103,6 +108,8 @@ const Title = styled.div`
     text-align: center;
     margin-top: 10px;
     font-size: 30px;
+    color: ${white};
+    font-style: italic;
 `
 const PathsContainer = styled.div`
     font-family: ${logoFont};
@@ -111,6 +118,8 @@ const PathsContainer = styled.div`
 `
 const PathItem = styled.div`
     font-family: ${logoFont};
+    color: ${white};
+    font-weight: bold;
 `
 const CartContainer = styled.div`
     display: flex;
@@ -118,4 +127,5 @@ const CartContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     color: ${white};
+    margin-bottom: 10px;
 `
