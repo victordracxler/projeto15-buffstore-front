@@ -4,10 +4,12 @@ import { useAuth } from '../../../providers/auth';
 import { baseFont } from '../../../constants/fonts';
 import { URL } from '../../../constants/urls';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddressForm() {
 	const { token, productsList, totalPrice, totalItems } = useAuth();
 	const [address, setAdress] = useState('');
+	const navigate = useNavigate();
 
 	function handleCheckout(e) {
 		e.preventDefault();
@@ -25,7 +27,10 @@ export default function AddressForm() {
 
 		axios
 			.post(URLcheckout, body, config)
-			.then((res) => console.log(res.data))
+			.then((res) => {
+				console.log(res.data);
+				navigate('/sucesso');
+			})
 			.catch((err) => console.log(err.response));
 	}
 
